@@ -1,30 +1,23 @@
-#include <stdio.h>
-#include<string.h>
-
-int main() {
-    int n, m;
-    scanf("%d,%d", &n, &m);
-    int a[n];
-    memset(a, 0, sizeof(a));
-    int count = n, counting = 0, i = 0;
-    while(count > m){
-        if(a[i] == 0)counting++;
-        if(counting == m){
-            a[i] = 1;
-            counting = 0;
-            count--;
+#include"stdio.h"
+int main()
+{ int sc[30]={0},s,i,j,n;
+scanf("%d",&n);
+for(i=0;i<n;i++)
+{ scanf("%d",&s);
+if(s>=70&&s<100) 
+sc[s-70]++; 
+}
+while(1){
+    for(i = 29;i >= 0;i--)
+    {
+        while (sc[i]!=0)
+        {
+            printf(" %d",i+70);
+            sc[i]--;
         }
-        i++;
-        if (i > n) i = 0;
 
-        
     }
-
-    for(int i = 0; i < n; i++){
-        if(!a[i]){
-            printf("%5d ", i + 1);
-        }
-    }
-
-    
+    break;
+}
+return 0;
 }
