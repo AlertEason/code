@@ -1,23 +1,28 @@
-#include"stdio.h"
+#include <stdio.h>
+#define N 100
+void insert(int s[],int x,int n)
+{ int i;
+if(x>s[n-1])
+s[n]=x;
+else
+{ for(i=n;i>0&&s[i-1]>x;i--)
+s[i]=s[i-1];
+s[i]=x;
+}
+}
+void insertsort(int s[],int n)
+{
+    for(int i = 1; i < n; i++) insert(s, s[i], i);
+    
+}
 int main()
-{ int sc[30]={0},s,i,j,n;
+{
+int i,n,a[N];
 scanf("%d",&n);
 for(i=0;i<n;i++)
-{ scanf("%d",&s);
-if(s>=70&&s<100) 
-sc[s-70]++; 
-}
-while(1){
-    for(i = 29;i >= 0;i--)
-    {
-        while (sc[i]!=0)
-        {
-            printf(" %d",i+70);
-            sc[i]--;
-        }
-
-    }
-    break;
-}
+scanf("%d",&a[i]);
+insertsort(a,n);
+for(i=0;i<n;i++)
+printf("%5d",a[i]);
 return 0;
 }
