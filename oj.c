@@ -1,39 +1,45 @@
-#include <stdio.h>
-#include <string.h>
+#include"stdio.h"
+#include"stdlib.h"
+#define N 10
+void input(int (*s)[N],int n);
+int *linemax(int (*s)[N],int n);
 
-void unzip(char *s1, char *s2) {
-    char *p = s1, *q = s2;
-    int flag = 0, n;
-    while (*p) {
-        if (*p >= '0' && *p <= '9') {
-           if(!flag){
-            flag = 1;
-            n = *p - '0';
-            }
-            else{
-            n = n * 10 + (*p - '0');
-            }
-            p++;            
-        }else if((*p >= 'A'&& *p <= 'Z')||(*p >= 'a' && *p <= 'z')){
-            if(flag){
-                for(int i = 0; i < n; i++){
-                    *q++ = *p;
-                }
-                flag = 0;
-            }else{
-                *q++ = *p;
-            }
-            p++;
-            
-        }
-    }
-    *q = '\0'; // 添加字符串结束符
+int main()
+{
+    int i,n,a[N][N],*p; // 修正：p应为指针类型
+    scanf("%d",&n);
+    input(a,n);
+    p=linemax(a,n);
+    for(i=0;i<n;i++)
+        printf("%5d",*(p+i)); // 修正：正确解引用指针访问元素
+    free(p); // 修正：删除多余符号
+    return 0;
 }
 
-int main() {
-    char s1[80], s2[1000];
-    gets(s1); // 注意：gets存在缓冲区溢出风险，建议使用fgets
-    unzip(s1, s2);
-    puts(s2);
-    return 0;
+void input(int (*s)[N],int n)
+{
+    int i,j,*p;
+    for(i=0;i<n;i++,s++)
+        for(p=*s,j=0;j<n;j++,p++)
+            scanf("%d",p);
+}
+
+int *linemax(int (*s)[N],int n)
+{
+    int *p,*r,i,j,max;
+    if((r=(int *)calloc(n,sizeof(int)))!=NULL)//动态分配内存构建存放最大值的数组
+    {
+        for(i=0;i<n;i++,s++)
+        {
+            max=**s;//将当前行的第一个元素的值赋给变量 max
+            for(j=1;j<n;j++){
+                if(*(*s+j)>max)
+                    max=*(*s+j);
+            }
+            *(r+i)=max;
+        }
+        return r;
+    }
+    else
+        return NULL;
 }
