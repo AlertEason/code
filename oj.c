@@ -1,66 +1,65 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <math.h>
+#include <string.h>
+#define N 100
 
-#define MAX 300000
+int isalpha(char ch) //判断ch是否为字母，ch为小写字母返回1，大写字母返回-1，其他字符则返回0
+{
+    if(ch>='a'&&ch<='z')
+        return 1;
+    else if(ch>='A'&&ch<='Z')
+        return -1;
+    else
+        return 0;
+}
 
-int main() {
-    // 埃拉托斯特尼筛法生成素数表
-    bool isPrime[MAX + 1];
-    for (int i = 2; i <= MAX; i++) isPrime[i] = true;
-    for (int i = 2; i * i <= MAX; i++) {
-        if (isPrime[i]) {
-            for (int j = i * i; j <= MAX; j += i) {
-                isPrime[j] = false;
+int extract(char *s,char words[][80]) //从字符串s中提取单词，并存放于words中，返回提取的单词个数
+{
+    int i,j,n,flag;
+    char ch;
+    i=0,n=-1,flag=0;
+    while(ch=s[i])
+    {
+        if(isalpha(ch))
+        {
+            if(flag==0) //新单词开始
+            {
+                
             }
+            else
+                words[n][++j]=ch;
         }
-    }
-
-    // 收集[100000,300000]的素数到数组
-    int primes[100000];  // 预分配足够大的数组
-    int count = 0;
-    for (int i = 100000; i <= MAX; i++) {
-        if (isPrime[i]) {
-            primes[count++] = i;
+        else if(flag) //当前单词提取结束
+        {
+            words[n][j]='\0';
+            flag=0;
         }
+        i++;
     }
+    return n+1;
+}
 
-    // 处理查询
-    int n, a, b;
-    scanf("%d", &n);
-    for (int i = 0; i < n; i++) {
-        scanf("%d,%d", &a, &b);
-        
-        // 二分查找第一个 >=a 的素数位置
-        int left = 0, right = count - 1, start = count;
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (primes[mid] >= a) {
-                start = mid;
-                right = mid - 1;
-            } else {
-                left = mid + 1;
+void strsort(char str[][80],int n) //采用冒泡算法对str中的n个字符串按升序排序
+{
+    int i,j;
+    char t[80];
+    for(i=1;i<n;i++)
+        for(j=0;j<n-i;j++)
+            if(strcmp(str[j],str[j+1])>0)
+            {
+                strcpy(t,str[j]);
+                strcpy(str[j], str[j+1]);
+                strcpy(str[j+1],t);
             }
-        }
-        
-        // 二分查找最后一个 <=b 的素数位置
-        left = 0, right = count - 1;
-        int end = -1;
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (primes[mid] <= b) {
-                end = mid;
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        
-        // 计算区间内素数个数
-        int result = (start <= end) ? (end - start + 1) : 0;
-        printf("%d\n", result);
-    }
+}
 
+int main()
+{
+    char line[81],words[N][80];
+    int i,n;
+    gets(line);
+    n=extract(line,words);//提取单词
+    strsort(words,n); //单词排序
+    for(i=0;i<n;i++)
+        puts(words[i]);
     return 0;
 }
