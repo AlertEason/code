@@ -1,24 +1,21 @@
 #include <stdio.h>
-#include <stdlib.h>
-
-struct Time
-{ int hour;
-int minute;
-int second;
+struct complex complexproduct(struct complex s1,struct complex s2);
+struct complex
+{ double sb;
+double xb;
 };
 int main()
-{ int n;
-struct Time t1;
-char temp[10];
-scanf("%9s",temp);
-sscanf(temp,"%d:%d:%d",&t1.hour,&t1.minute,&t1.second);
-scanf("%d",&n);
-int total_seconds = t1.hour * 3600 + t1.minute * 60 + t1.second;
-total_seconds += n;
-total_seconds %= 86400;
-t1.hour = total_seconds / 3600;
-t1.minute = (total_seconds % 3600) / 60;
-t1.second = total_seconds % 60;
-printf("%02d:%02d:%02d\n",t1.hour,t1.minute,t1.second);
+{ struct complex c1,c2,c3;
+scanf("%lf,%lf",&c1.sb,&c1.xb);
+scanf("%lf,%lf",&c2.sb,&c2.xb);
+c3 = complexproduct(c1,c2);
+printf("%f,%f",c3.sb,c3.xb);
 return 0;
+}
+struct complex complexproduct(struct complex s1,struct complex s2)
+{
+    struct complex s3;
+    s3.sb = s1.sb * s2.sb - s1.xb * s2.xb;
+    s3.xb = s1.sb * s2.xb + s1.xb * s2.sb;
+    return s3;
 }
