@@ -5,3 +5,4 @@
 temp.c
 # 忽略所有 .exe 文件
 *.exe
+oj.exe
