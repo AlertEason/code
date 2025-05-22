@@ -19,20 +19,20 @@ int main()
             printf("%s:%g\n", books[i].name, books[i].price);
             flag = 1;
         }
-    if (flag == 0)
-        printf("None\n");
+    if (!flag)
+        printf("None");
     return 0;
 }
 
 int instring(char *s1, char *s2) // s1若属于s2的子串，则返回1，否则返回0
 {
-    int i, j, k;
+    int i, j;
     int len1 = strlen(s1);
     int len2 = strlen(s2);
 
-    for(int i = 0; i < len2 - len1; i++)
+    for(i = 0; i < len2 - len1; i++)
     {
-        for(int j = 0; j < len1; j++)
+        for(j = 0; j < len1; j++)
         {
             if(s2[i+j] != s1[j])
                 break;
