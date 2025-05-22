@@ -1,27 +1,15 @@
 #include <stdio.h>
-
-struct tablet
+double power(double x,int n)
 {
-    char name[20];
-    int price;
-};
-
-int main(void){
-    int n;
-    scanf("%d",&n);
-    struct tablet students[1000];
-    int total = 0;
-    for (int i = 0; i < n; i++){
-        scanf("%s %d",students[i].name,&students[i].price);
-        total += students[i].price;
-    }
-    double average = (double)total / n;
-    
-    for(int i = 0; i < n; i++){
-        if (students[i].price > average){
-            printf("%s,%d\n",students[i].name,students[i].price);
-        }
-    }
-    return 0;
-
+    if(n==0) return 1;
+    if(n>0) return x*power(x,n-1);
+    else return 1/power(x,-n);
+}
+int main()
+{ double x,a;
+int n;
+scanf("%lf,%d",&x,&n);
+a=power(x,n);
+printf("%g",a);
+return 0;
 }
