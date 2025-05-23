@@ -1,19 +1,14 @@
 #include <stdio.h>
-double f(double x, int n)
+int fib(int n)
 {
-    if (n == 1)
-        return x;
-    else if (n > 0)
-    {
-        return x + (-x) * f(x, n - 1);
-    }
+    if(n == 2|| n == 1)
+        return 1;
+    else
+        return fib(n-1)+fib(n-2);
 }
 int main()
-{
-    double x, a;
-    int n;
-    scanf("%lf,%d", &x, &n);
-    a = f(x, n);
-    printf("%g", a);
-    return 0;
+{ int n;
+scanf("%d",&n);
+printf("%d",fib(n));
+return 0;
 }
