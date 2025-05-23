@@ -1,15 +1,24 @@
 #include <stdio.h>
-int ack(int m,int n)
+void dec2bin(int n, char *s, int *index)
 {
-    if(m==0) return n+1;
-    else if(n==0&&m>0) return ack(m-1,1);
-    else if (n>0&&m>0) return ack(m-1,ack(m,n-1));
-    
+    if (n < 2)
+    {
+        s[*index] = n + '0';
+        (*index)++;
+        return;
+    }
+
+    dec2bin(n / 2, s, index);
+    s[*index] = (n % 2) + '0';
+    (*index)++;
 }
 int main()
-{ int m,n,s;
-scanf("%d,%d",&m,&n);
-s=ack(m,n);
-printf("%d",s);
-return 0;
+{
+    int n, i, index = 0;
+    char r[64];
+    scanf("%d", &n);
+    dec2bin(n, r, &index);
+    for (i = 0; i < index; i++)
+        printf("%c", r[i]);
+    return 0;
 }
