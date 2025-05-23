@@ -1,24 +1,35 @@
 #include <stdio.h>
-void dec2bin(int n, char *s, int *index)
-{
-    if (n < 2)
+#include <string.h>
+#define N 10
+
+int wc[N] = {0};
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    int nums[n];
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &nums[i]);
+    }
+    for (int i = 0; i < n; i++) 
     {
-        s[*index] = n + '0';
-        (*index)++;
-        return;
+        int num = nums[i];
+        while(num != 0) {
+            wc[num % 10]++;
+            num /= 10;
+        }
+    }
+    int max = wc[0];
+    for(int i = 0; i < N; i++){
+        if(wc[i] > max){
+            max = wc[i];
+        }
+    }
+    for(int i = 0; i < N; i++){
+        if(wc[i] == max){
+            printf("%d:%d\n", i, wc[i]);
+            
+        }
     }
 
-    dec2bin(n / 2, s, index);
-    s[*index] = (n % 2) + '0';
-    (*index)++;
-}
-int main()
-{
-    int n, i, index = 0;
-    char r[64];
-    scanf("%d", &n);
-    dec2bin(n, r, &index);
-    for (i = 0; i < index; i++)
-        printf("%c", r[i]);
-    return 0;
 }
