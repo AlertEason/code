@@ -1,35 +1,22 @@
 #include <stdio.h>
+#include <ctype.h>
 #include <string.h>
-#define N 10
-
-int wc[N] = {0};
+#include <stdlib.h>
 
 int main() {
-    int n;
-    scanf("%d", &n);
-    int nums[n];
-    for (int i = 0; i < n; i++) {
-        scanf("%d", &nums[i]);
-    }
-    for (int i = 0; i < n; i++) 
-    {
-        int num = nums[i];
-        while(num != 0) {
-            wc[num % 10]++;
-            num /= 10;
+    char str[100];
+    char hex_str[100] = "";
+    int i, j = 0;
+    fgets(str, sizeof(str), stdin);
+    for (i = 0; str[i] != '\0'; i++) {
+        if (str[i] == '-' && (i == 0 || (str[i - 1] != '-' &&!isxdigit(str[i - 1])))) {
+            hex_str[j++] = str[i];
+        } else if (isxdigit(str[i])) {
+            hex_str[j++] = str[i];
         }
     }
-    int max = wc[0];
-    for(int i = 0; i < N; i++){
-        if(wc[i] > max){
-            max = wc[i];
-        }
-    }
-    for(int i = 0; i < N; i++){
-        if(wc[i] == max){
-            printf("%d:%d\n", i, wc[i]);
-            
-        }
-    }
-
+    hex_str[j] = '\0';
+    long decimal = strtol(hex_str, NULL, 16);
+    printf("%s:%ld", hex_str, decimal);
+    return 0;
 }
