@@ -1,9 +1,21 @@
 #include <stdio.h>
+#include <string.h>
+#define MAX 1000
 
 int main(void)
 {
-    double n;
-    scanf("%lf",&n);
-    printf("%d\n", (int)n);
-    printf("%g\n", n - (int)n);
-}
+    char str[MAX] = "";
+    fgets(str, sizeof(str), stdin);
+    int n;
+    scanf("%d", &n);
+    int i = n;
+    while(1){
+        if(str[i] == '\0'){
+            break;
+        }
+        printf("%c", str[i]);
+        i++;
+        
+    }
+    return 0;
+}  
