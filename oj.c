@@ -6,14 +6,16 @@ int main(void)
 {
     char str[MAX] = "";
     fgets(str, sizeof(str), stdin);
-    int n;
-    scanf("%d", &n);
-    int i = n;
+    char n;
+    scanf("%c", &n);
+    int i = 0;
     while(1){
         if(str[i] == '\0'){
             break;
         }
-        printf("%c", str[i]);
+        if (str[i] != n){
+            printf("%c", str[i]);
+        }
         i++;
         
     }
