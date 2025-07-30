@@ -1,37 +1,29 @@
 #include <stdio.h>
 #define MAXN 20
 
-void strmcpy( char *t, int m, char *s );
+void delchar( char *str, char c );
 void ReadString( char s[] ); /* 由裁判实现，略去不表 */
 
 int main()
 {
-    char t[MAXN], s[MAXN];
-    int m;
-    
-    scanf("%d\n", &m);
-    ReadString(t);
-    strmcpy( t, m, s );
-    printf("%s\n", s);
+    char str[MAXN], c;
 
+    scanf("%c\n", &c);
+    ReadString(str);
+    delchar(str, c);
+    printf("%s\n", str);
+    
     return 0;
 }
 
 /* 你的代码将被嵌在这里 */
-void strmcpy( char *t, int m, char *s )
+
+void delchar( char *str, char c )
 {
-    int len = 0;
-    while(t[len] != '\0') len++;
-    if(len < m)
+    char temp[MAXN];
+    int i, j = 0;
+    for (i = 0; str[i] != '\0'; i++)
     {
-        *s = '\0';
-        return;
+        if()
     }
-    int i = m - 1;
-    while(i < len)
-    {
-        s[i - m + 1] = t[i];
-        i++;
-    }
-    s[i - m + 1] = '\0';
 }
